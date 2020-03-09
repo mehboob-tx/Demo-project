@@ -23,12 +23,22 @@
   <div class="register-logo">
     <a href="../../index2.html"><b>Admin</b>Registration</a>
   </div>
+  @if($errors->any())
+    <div class="alert alert-danger">
+      <strong>Oopps! </strong> Something went wrong.
+      <ul>
+        @foreach($errors->all() as $error)
+          <li> {{ $error }} </li>
+        @endforeach
+      </ul>
+    </div>
+  @endif
 
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="{{ Route('admin.register') }}" method="post">
+      <form action="{{ Route('admin.register') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="input-group mb-3">
@@ -63,6 +73,9 @@
             </div>
           </div>
         </div>
+        <div class="input-group mb-3">
+          <input type="file" name="file" placeholder="Upload the snap">
+        </div>
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
@@ -80,7 +93,7 @@
         </div>
       </form>
 
-      <a href="{{ url('login') }}" class="text-center">I already have a membership</a>
+      <a href="{{ url('/') }}" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

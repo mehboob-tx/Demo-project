@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Admin;
 use Illuminate\Support\Facades\Hash;
-
+use Validator;
 
 use Illuminate\Http\Request;
 
@@ -26,7 +26,8 @@ class AdminRegisterController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email'=> ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'=>['required' , 'min:3' , 'max:15']  
+            'password'=>['required' , 'min:3' , 'max:15'],
+            'file' => [ 'required' , 'mimes:jpeg,bmp,png' , 'max:2048' ] 
         ]);
          
         $password = $request->input('password'); 
@@ -39,6 +40,10 @@ class AdminRegisterController extends Controller
                 $newpassword=Hash::make($password);
 
                 $admin->password=$newpassword;
+                $fileName = time().'.'.$request->file->extension();  
+   
+                $request->file->move(public_path('uploads'), $fileName);
+                $admin->file= $fileName;
                 $admin->save();
                 return redirect('/');
          }
