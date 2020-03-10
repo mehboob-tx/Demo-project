@@ -6,7 +6,7 @@ use App\Admin;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-
+use Session;
 
 class AdminController extends Controller
 {
@@ -17,6 +17,8 @@ class AdminController extends Controller
      */
     public function admin()
     {
+        //$filename=Admin::select('file')->where('id',  Session::get('id') )->get();
+
         return view('admin-frontend.admin-index');
     }
     public function userTable()

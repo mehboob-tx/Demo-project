@@ -44,8 +44,13 @@ class AdminLoginController extends Controller
              Session::put('email',$request->email);   //Update
 
                 Session::put('name', $user->name);
+                Session::put('id', $user->id);
+                Session::put('file', $user->file);
+
+
               //  $user=Session::get('user');
                 //echo $user->name; die ;
+                //$filename=$request->file;
 
 
         return redirect('admin')->with('success','Login Successfully');
