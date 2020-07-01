@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/','AdminController@login');
 //Route::get('register','AdminController@register');
 
-Route::get('/','AdminLoginController@showLoginForm');
+Route::get('/index','AdminLoginController@showLoginForm');
 Route::post('admin-login','AdminLoginController@login')->name('admin.login');
 
 Route::get('register','AdminRegisterController@showRegisterForm');
